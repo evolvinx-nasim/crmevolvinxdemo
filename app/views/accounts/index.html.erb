@@ -1,0 +1,22 @@
+<div class="row-fluid page-title">
+  <h2>Accounts <span class="aside-title-link">[<%= link_to "create", new_account_path %>]</span></h2>
+</div>
+
+<%= render :partial => 'accounts/account_list' %>
+
+<script>
+  $(".lnk-contact").bind('click', function(e){
+    var _id = $(this).attr("id");
+    $('#alertContent').html("");
+    $('#alertModalLabel').html('Contacts');
+    $('#alertModal').modal('show');
+    $('#alertContent').html("Loading ...");
+    $.ajax({
+      url: '../account/'+_id+'/get_contacts',
+      success: function(html){
+        $('#alertContent').html(html);
+      }
+    });
+    return false;
+  });
+</script>

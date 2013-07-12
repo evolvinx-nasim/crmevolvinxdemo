@@ -1,0 +1,190 @@
+<div class="row-fluid page-title">
+  <h2>Lead Details</h2>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Personal Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.title" %></span>
+          <span class="field-value">
+            <% if @lead.title.nil? || @lead.title == '' %>
+              N/A
+            <% else %>
+              <%= @lead.title %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.first_name" %></span>
+          <span class="field-value">
+            <% if @lead.firstname.nil? || @lead.firstname == '' %>
+              N/A
+            <% else %>
+              <%= @lead.firstname %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.last_name" %></span>
+          <span class="field-value">
+            <%= @lead.lastname %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.email" %></span>
+          <span class="field-value">
+            <%= @lead.email %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.status" %></span>
+          <span class="field-value">
+            <% if @lead.status == 1 %>
+              Active
+            <% else %>
+              Inactive
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.company" %></span>
+          <span class="field-value">
+            <% if @lead.company.nil? || @lead.company == '' %>
+              N/A
+            <% else %>
+              <%= @lead.company %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.phone" %></span>
+          <span class="field-value">
+            <% if @lead.phone.nil? || @lead.phone == '' %>
+              N/A
+            <% else %>
+              <%= @lead.phone %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.ratting" %></span>
+          <span class="field-value">
+            <% if @lead.ratting.nil? || @lead.ratting == '' %>
+              N/A
+            <% else %>
+              <%= @lead.company %>
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="field-set-container">
+  <h1 class="title">Address Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.address" %></span>
+          <span class="field-value">
+            <% if !@lead.street.nil?  %>
+              <%= @lead.street %>
+            <% end %>
+            <% if !@lead.city.nil? %>
+              <%= @lead.city %>
+            <% end %>
+            <% if !@lead.state.nil? %>
+              <%= @lead.state %>
+            <% end %>
+            <% if !@lead.zip.nil? %>
+              <%= @lead.zip %>
+            <% end %>
+            <% if (@lead.street.nil? || @lead.street == '') && (@lead.city.nil? || @lead.city == '') && (@lead.state.nil? || @lead.state == '') && (@lead.zip.nil? || @lead.zip == '')  %>
+              N/A
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Other Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.annual_revenue" %></span>
+          <span class="field-value">
+            <% if @lead.annual_revenue.nil? || @lead.annual_revenue == '' %>
+              N/A
+            <% else %>
+              <%= @lead.annual_revenue %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.employee_no" %></span>
+          <span class="field-value">
+            <% if @lead.employee_no.nil? || @lead.employee_no == '' %>
+              N/A
+            <% else %>
+              <%= @lead.employee_no %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.lead_source" %></span>
+          <span class="field-value">
+            <% if @lead.lead_source.nil? || @lead.lead_source == '' %>
+              N/A
+            <% else %>
+              <%= @lead.lead_source %>
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "lead.description" %></span>
+          <span class="field-value">
+            <% if @lead.description.nil? || @lead.description == '' %>
+              N/A
+            <% else %>
+              <%= @lead.description %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.created_at" %></span>
+          <span class="field-value">
+            <%= @lead.created_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.updated_at" %></span>
+          <span class="field-value">
+            <%= @lead.updated_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-actions" style="text-align: center;">
+  <div class="btn-group">
+    <a class="btn btn-small" href="<%= edit_lead_path(:id => @lead.unique_id) %>">Edit</a>
+    <%= link_to "Delete", lead_path(:id => @lead.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+    <a class="btn btn-small" href="<%= leads_path %>">Cancel</a>
+  </div>
+</div>
+<div class="clear"></div>
+

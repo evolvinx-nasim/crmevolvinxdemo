@@ -1,0 +1,90 @@
+.error{
+    color: #FF0000;
+}
+
+.alert{
+    margin-bottom: 10px!important;
+}
+
+.tab-title{
+    width: 500px;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+.create-new-title{
+    width: 200px;
+    float: right;
+    text-align: right;
+}
+
+.navbar{
+    margin-bottom: 10px !important;
+}
+
+.page-title h2{
+    font-weight: normal;
+    font-size: 1.8em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.aside-title-link{
+    font-size: .8em!important;
+    margin-left: 10px;
+}
+
+/*
+*   Styles for fieldset container
+*/
+.pad-lft-20{
+    text-align: left;
+    padding-left: 20px;
+}
+
+#contact_info h3{
+    border-bottom: 1px solid #ccc;
+}
+
+#contact_info table{
+    margin-left: 30px;
+}
+
+.field-set-container{
+    border: 1px solid #f0f0f0;
+}
+
+.field-set-container .title{
+    font-weight: bold;
+    font-size: 12px;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 5px 10px;
+    line-height: 1.5em;
+    text-transform: uppercase;
+}
+
+.field-set-container .body{
+    padding: 10px;
+}
+.field-row{
+    margin: 0;
+    padding: 2px 0;
+}
+.field-set-container .field{
+
+}
+
+.field-set-container .field-label{
+    padding-right: 5px;
+    text-align: right;
+    width: 150px;
+    float: left;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.field-set-container .field-value{
+    padding-left: 5px;
+    display: inline-block;
+    width: 350px;
+}

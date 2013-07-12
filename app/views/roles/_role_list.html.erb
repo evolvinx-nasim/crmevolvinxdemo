@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span6">
+    <table class="table table-bordered table-hover table table-condensed">
+      <thead>
+        <tr>
+          <th><%= (t "role.name") %></th>
+          <th colspan="2"><%= (t "role.created_at") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for role in @roles do %>
+            <tr class="<%= cycle :odd, :even %>">
+              <td><%= role.name %></td>
+              <td><%= role.created_at.to_formatted_s(:db) %></td>
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-small" href="<%= edit_role_path(:id => role.id) %>">Edit</a>
+                  <%= link_to "Delete", role_path(:id => role.id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -1,0 +1,66 @@
+<div class="row-fluid">
+  <div class="span12">
+    <%if @leads.count <= 0 %>
+      <div class="alert alert-notice">There is no leads found!</div>
+    <%  else %>
+      <table class="table table-bordered table-hover table table-condensed">
+        <thead>
+          <tr>
+            <th><%= (t "lead.title") %></th>
+            <th><%= (t "lead.first_name") %></th>
+            <th><%= (t "lead.last_name") %></th>
+            <th><%= (t "lead.company") %></th>
+            <th><%= (t "lead.email") %></th>
+            <th><%= (t "lead.phone") %></th>
+            <th colspan="2"><%= (t "lead.status") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for lead in @leads do %>
+              <tr class="<%= cycle :odd, :even %>">
+                <td style="text-transform:capitalize;">
+                  <% if lead.title.nil? || lead.title == '' %>
+                    N/A
+                  <% else %>
+                    <%= lead.title %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if lead.firstname.nil? || lead.firstname == '' %>
+                    N/A
+                  <% else %>
+                    <%= lead.firstname %>
+                  <% end %>
+                </td>
+                <td><%= lead.lastname %></td>
+                <td>
+                  <% if lead.company.nil? || lead.company == '' %>
+                    N/A
+                  <% else %>
+                    <%= lead.company %>
+                  <% end %>
+                </td>
+                <td><%= lead.email %></td>
+                <td>
+                  <% if lead.phone.nil? || lead.phone == '' %>
+                    N/A
+                  <% else %>
+                    <%= lead.phone %>
+                  <% end %>
+                </td>
+                <td style="text-transform:capitalize;"><%= lead.status %></td>
+                <td>
+                  <div class="btn-group">
+                    <a class="btn btn-small" href="<%= lead_path(:id => lead.unique_id) %>">Details</a>
+                    <a class="btn btn-small" href="<%= edit_lead_path(:id => lead.unique_id) %>">Edit</a>
+                    <a class="btn btn-small" href="<%= convert_lead_path(:id => lead.unique_id) %>">Convert Lead</a>
+                    <%= link_to "Delete", lead_path(:id => lead.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <%  end %>
+    </div>
+  </div>

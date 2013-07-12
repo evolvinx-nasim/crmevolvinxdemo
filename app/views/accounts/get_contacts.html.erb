@@ -1,0 +1,75 @@
+<div class="row-fluid">
+  <div class="span12">
+    <p style="text-align: right;">
+      <%= link_to "Create New", {:controller => "contacts", :action => "new", :accid => params[:id]}, {:class => 'btn'} %>
+    </p>
+
+    <%if @contacts.count <= 0 %>
+    <div class="alert alert-notice">There is no contacts for this account!</div>
+    <%  else %>
+      <table class="table table-bordered table-hover table table-condensed">
+        <thead>
+          <tr>
+            <th><%= (t "contact.title") %></th>
+            <th><%= (t "contact.first_name") %></th>
+            <th><%= (t "contact.last_name") %></th>
+            <th><%= (t "contact.email") %></th>
+            <th><%= (t "contact.account_name") %></th>
+            <th><%= (t "contact.phone") %></th>
+            <th colspan="2"><%= (t "contact.status") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for contact in @contacts do %>
+              <tr class="<%= cycle :odd, :even %>">
+                <td style="text-transform:capitalize;">
+                  <% if contact.title.nil? || contact.title == '' %>
+                    N/A
+                  <% else %>
+                    <%= contact.title.strip %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if contact.firstname.nil? || contact.firstname == '' %>
+                    N/A
+                  <% else %>
+                    <%= contact.firstname %>
+                  <% end %>
+                </td>
+                <td><%= contact.lastname %></td>
+                <td><%= contact.email %></td>
+                <td style="text-transform:capitalize;">
+                  <% if contact.account_name.nil? || contact.account_name == '' %>
+                    N/A
+                  <%  else %>
+                    <%= contact.account.account_name %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if contact.phone.nil? || contact.phone == '' %>
+                    N/A
+                  <% else %>
+                    <%= contact.phone %>
+                  <% end %>
+                </td>
+                <td style="text-transform:capitalize;">
+                  <% if contact.status == 1 %>
+                    Active
+                  <% else %>
+                    Inactive
+                  <% end %>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <a class="btn btn-small" href="<%= contact_path(:id => contact.unique_id) %>">Details</a>
+                    <a class="btn btn-small" href="<%= edit_contact_path(:id => contact.unique_id) %>">Edit</a>
+                    <%= link_to "Delete", contact_path(:id => contact.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <%  end %>
+    </div>
+  </div>

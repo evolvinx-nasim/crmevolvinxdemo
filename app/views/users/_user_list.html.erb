@@ -1,0 +1,30 @@
+<div class="row-fluid">
+  <div class="span12">
+    <table class="table table-bordered table-hover table table-condensed">
+      <thead>
+        <tr>
+          <th><%= (t "member.username") %></th>
+          <th><%= (t "member.email") %></th>
+          <th><%= (t "member.created_at") %></th>
+          <th colspan="2"><%= (t "member.role") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for member in @members do %>
+            <tr class="<%= cycle :odd, :even %>">
+              <td><%= member.username %></td>
+              <td><%= member.email %></td>
+              <td><%= member.created_at.to_formatted_s(:db) %></td>
+              <td><%= member.role.name %></td>
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-small" href="<%= edit_user_path(:id => member.unique_id) %>">Edit</a>
+                  <%= link_to "Delete", user_path(:id => member.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

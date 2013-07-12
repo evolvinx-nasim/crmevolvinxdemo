@@ -1,0 +1,78 @@
+<div class="row-fluid page-title">
+  <h2>Update Account</h2>
+</div>
+<div id="editAccount">
+  <div id="ajaxHandler">
+    <div class="row-fluid">
+      <div id="crmAjaxProgress" class="progress progress-striped active" style="display: none;">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+      <div id="crmAjaxMessage" class="alert" style="display: none;">
+        Error!
+      </div>
+    </div>
+  </div>
+  <%= simple_form_for(@account, :url => account_path(:id => @account.unique_id), :method => :update, :html => {:class => "form-horizontal"})  do |f| %>
+    <div class="field-set-container">
+      <h1 class="title">Basic Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :account_name, :label => (t "account.account_name") %>
+            <%= f.input :phone, :label =>(t "account.phone") %>
+            <%= f.input :fax, :label =>(t "account.fax") %>
+            <%= f.input :website, :label =>(t "account.website") %>
+          </div>
+          <div class="span5">
+            <%= f.input :status, :collection =>[["Select",""],["Active","1"],["Inactive","2"]], :selected => @account.status %>
+            <%= f.input :type, :label =>(t "account.type") %>
+            <%= f.input :discount, :label =>(t "account.client_discount") %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-set-container">
+      <h1 class="title">Address Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :b_street, :as => :text, :label => (t "account.business_street"), :input_html => { :cols => 50, :rows => 3 } %>
+            <%= f.input :b_city, :label =>(t "account.business_city") %>
+            <%= f.input :b_state, :label =>(t "account.business_state") %>
+            <%= f.input :b_zip, :label =>(t "account.business_zip") %>
+          </div>
+          <div class="span5">
+            <%= f.input :s_street, :as => :text, :label => (t "account.shipping_street"), :input_html => { :cols => 50, :rows => 3 } %>
+            <%= f.input :s_city, :label =>(t "account.shipping_city") %>
+            <%= f.input :s_state, :label =>(t "account.shipping_state") %>
+            <%= f.input :s_zip, :label =>(t "account.shipping_zip") %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-set-container">
+      <h1 class="title">Other Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :industry, :label =>(t "account.industry") %>
+            <%= f.input :employees, :label =>(t "account.employees") %>
+            <%= f.input :annual_revenue, :label =>(t "account.annual_revenue") %>
+          </div>
+          <div class="span5">
+            <%= f.input :description, :as => :text, :input_html => { :cols => 50, :rows => 4 } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <div class="btn-group">
+        <%= f.submit nil, :class => "btn btn-primary" %>
+        <input type="button" class="btn" onclick="window.location='<%= account_path(:id => @account.unique_id) %>'" value="Cancel" />
+      </div>
+    </div>
+  <% end %>
+</div>

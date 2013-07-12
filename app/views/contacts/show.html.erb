@@ -1,0 +1,172 @@
+<div class="row-fluid page-title">
+  <h2>Contact Details</h2>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Personal Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.title" %></span>
+          <span class="field-value">
+            <% if @contact.title.nil? || @contact.title == '' %>
+              N/A
+            <% else %>
+              <%= @contact.title %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.first_name" %></span>
+          <span class="field-value">
+            <% if @contact.firstname.nil? || @contact.firstname == '' %>
+              N/A
+            <% else %>
+              <%= @contact.firstname %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.last_name" %></span>
+          <span class="field-value">
+            <%= @contact.lastname %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.email" %></span>
+          <span class="field-value">
+            <%= @contact.email %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.phone" %></span>
+          <span class="field-value">
+            <% if @contact.phone.nil? || @contact.phone == '' %>
+              N/A
+            <% else %>
+              <%= @contact.phone %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.account_name" %></span>
+          <span class="field-value">
+            <% if @contact.account_name.nil? || @contact.account_name == '' %>
+              N/A
+            <% else %>
+              <%= link_to @contact.account.account_name, account_path(:id => @contact.account.unique_id) %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.position" %></span>
+          <span class="field-value">
+            <% if @contact.position.nil? || @contact.position == '' %>
+              N/A
+            <% else %>
+              <%= @contact.position %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.status" %></span>
+          <span class="field-value">
+            <% if @contact.status == 1 %>
+              Active
+            <% else %>
+              Inactive
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="field-set-container">
+  <h1 class="title">Address Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.mailing_address" %></span>
+          <span class="field-value">
+            <% if !@contact.m_street.nil?  %>
+              <%= @contact.m_street %>
+            <% end %>
+            <% if !@contact.m_city.nil? %>
+              <%= @contact.m_city %>
+            <% end %>
+            <% if !@contact.m_state.nil? %>
+              <%= @contact.m_state %>
+            <% end %>
+            <% if !@contact.m_zip.nil? %>
+              <%= @contact.m_zip %>
+            <% end %>
+            <% if (@contact.m_street.nil? || @contact.m_street == '') && (@contact.m_city.nil? || @contact.m_city == '') && (@contact.m_state.nil? || @contact.m_state == '') && (@contact.m_zip.nil? || @contact.m_zip == '')  %>
+              N/A
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.other_street" %></span>
+          <span class="field-value">
+            <% if !@contact.o_street.nil? %>
+              <%= @contact.o_street %>
+            <% end %>
+            <% if !@contact.o_city.nil? %>
+              <%= @contact.o_city %>
+            <% end %>
+            <% if !@contact.o_state.nil? %>
+              <%= @contact.o_state %>
+            <% end %>
+            <% if !@contact.o_zip.nil? %>
+              <%= @contact.o_zip %>
+            <% end %>
+            <% if (@contact.o_street.nil? || @contact.o_street == '') && (@contact.o_city.nil? || @contact.o_city == '') && (@contact.o_state.nil? || @contact.o_state == '') && (@contact.o_zip.nil? || @contact.o_zip == '')  %>
+              N/A
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Other Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.created_at" %></span>
+          <span class="field-value">
+            <%= @contact.created_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "contact.updated_at" %></span>
+          <span class="field-value">
+            <%= @contact.updated_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-actions" style="text-align: center;">
+  <div class="btn-group">
+    <a class="btn btn-small" href="<%= edit_contact_path(:id => @contact.unique_id) %>">Edit</a>
+    <%= link_to "Delete", contact_path(:id => @contact.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+    <a class="btn btn-small" href="<%= contacts_path %>">Cancel</a>
+  </div>
+</div>
+<div class="clear"></div>
+

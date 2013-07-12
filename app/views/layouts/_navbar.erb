@@ -1,0 +1,43 @@
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <ul class="nav">
+        <li class="<%= 'active' if(controller.controller_name == "home") %>"><%= link_to "Home", root_path %></li>
+        <% if current_member %>
+
+          <li class="<%= 'active' if(controller.controller_name == "leads") %>"><%= link_to "Leads", leads_path %></li>
+          <li class="<%= 'active' if(controller.controller_name == "contacts") %>"><%= link_to "Contacts", contacts_path %></li>
+          <li class="<%= 'active' if(controller.controller_name == "accounts") %>"><%= link_to "Accounts", accounts_path %></li>
+
+          <% if current_member.role_id != 3 %>
+            <li class="<%= 'active' if(controller.controller_name == "opportunity") %>"><%= link_to "Opportunities", opportunity_index_path %></li>
+            <li class="<%= 'active' if(controller.controller_name == "contracts") %>"><%= link_to "Contracts", contracts_path %></li>
+          <% end %>
+
+          <li id="settingsmenu" class="dropdown <%= 'active' if(controller.controller_name == "users" || controller.controller_name == "passwords" || controller.controller_name == "roles") %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings<b class="caret"></b></a>
+            <ul class="dropdown-menu pull-right">
+              <li class="<%= 'active' if current_page?(edit_user_path(:id => current_member.unique_id)) %>"><a href="<%= edit_user_path(:id => current_member.unique_id) %>">Edit Profile</a></li>
+              <li class="<%= 'active' if current_page?(edit_password_path(:id => current_member.unique_id)) %>"><a href="<%= edit_password_path(:id => current_member.unique_id) %>">Change Password</a></li>
+              <li class="divider"></li>
+
+              <% if current_member.role_id == 1 %>
+                <li class="<%= 'active' if current_page?(new_user_path) %>"><%= link_to "Create User", new_user_path %></li>
+                <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to "Manage Users", users_path %></li>
+                <li class="<%= 'active' if current_page?(roles_path) %>"><%= link_to "Manage Roles", roles_path %></li>
+                <li class="divider"></li>
+              <% end %>
+
+              <li><%= link_to "Sign Out", destroy_member_session_path, :method=>:delete %></li>
+            </ul>
+          </li>
+
+        <% else %>
+          <li class="<%= 'active' if(controller.controller_name != "registration" && controller.controller_name != "users" && controller.controller_name != "home" ) %>"><%= link_to "Sign In", new_member_session_path(current_member) %></li>
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="row-fluid">
+  <div class="span12">
+    <%if @accounts.count <= 0 %>
+    <div class="alert alert-notice">There is no accounts found!</div>
+    <%  else %>
+    <table class="table table-bordered table-hover table table-condensed">
+      <thead>
+        <tr>
+          <th><%= (t "account.account_name") %></th>
+          <th><%= (t "account.type") %></th>
+          <th><%= (t "account.industry") %></th>
+          <th><%= (t "account.employees") %></th>
+          <th><%= (t "account.annual_revenue") %></th>
+          <th colspan="2"><%= (t "account.status") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for account in @accounts do %>
+            <tr class="<%= cycle :odd, :even %>">
+              <td style="text-transform:capitalize;"><%= account.account_name %></td>
+              <td style="text-transform:capitalize;">
+                <% if account.type.nil? || account.type == '' %>
+                  N/A
+                <% else %>
+                  <%= account.type %>
+                <% end %>
+              </td>
+              <td style="text-transform:capitalize;">
+                <% if account.industry.nil? || account.industry == ''  %>
+                  N/A
+                <% else %>
+                  <%= account.industry %>
+                <% end %>
+              </td>
+              <td>
+                <% if account.employees.nil? || account.employees == '' %>
+                  N/A
+                <% else %>
+                  <%= account.employees %>
+                <% end %>
+              </td>
+              <td>
+                <% if account.annual_revenue.nil? || account.annual_revenue == '' %>
+                  N/A
+                <% else %>
+                  <%= account.annual_revenue %>
+                <% end %>
+              </td>
+              <td style="text-transform:capitalize;">
+                <% if account.status == 1 %>
+                  Active
+                <% else %>
+                  Inactive
+                <% end %>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-small" href="<%= account_path(:id => account.unique_id) %>">Details</a>
+                  <a class="btn btn-small" href="<%= edit_account_path(:id => account.unique_id) %>">Edit</a>
+                  <a id="<%= account.unique_id %>" class="btn btn-small lnk-contact" href="javascript://">Contacts</a>
+                  <%= link_to "Delete", account_path(:id => account.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%  end %>
+    </div>
+  </div>
+
+
+
+  <div id="alertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true" data-backdrop="true" style="width: 80%;left: 9%; margin-left: auto;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 id="alertModalLabel" class="nts-modal-title"></h3>
+    </div>
+    <div class="modal-body">
+      <p id="alertContent"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">OK</button>
+    </div>
+  </div>

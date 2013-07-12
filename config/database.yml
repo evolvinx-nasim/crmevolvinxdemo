@@ -1,0 +1,38 @@
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+#
+#
+# Be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: crmevolvinxdemo
+  pool: 5
+  username: root
+  password:
+  host: 127.0.0.1
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  database: <%=ENV['OPENSHIFT_APP_NAME']%>
+  username: <%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%>
+  password: <%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%>
+  # socket:   <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
+  host:     <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%>
+  port:     <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%>
+
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: crmevolvinxdemo_testing
+  pool: 5
+  username: root
+  password: 
+  socket: /var/run/mysqld/mysqld.sock

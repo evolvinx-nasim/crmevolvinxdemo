@@ -1,0 +1,4 @@
+  <h1>welcome ! to the home page</h1>
+  <% if current_member %>
+  <%= link_to "Sign Out", destroy_member_session_path, :method => :delete %>
+  <% end %>

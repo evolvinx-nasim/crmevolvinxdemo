@@ -1,0 +1,238 @@
+
+<div class="row-fluid page-title">
+  <h2>Account Details</h2>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Basic Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.account_name" %></span>
+          <span class="field-value"><%= @account.account_name %></span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.phone" %></span>
+          <span class="field-value">
+            <% if @account.phone.nil? || @account.phone == '' %>
+              N/A
+            <% else %>
+              <%= @account.phone %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.fax" %></span>
+          <span class="field-value">
+            <% if @account.fax.nil? || @account.fax == '' %>
+              N/A
+            <% else %>
+              <%= @account.fax %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.website" %></span>
+          <span class="field-value">
+            <% if @account.website.nil? || @account.website == '' %>
+              N/A
+            <% else %>
+              <%= @account.website %>
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.status" %></span>
+          <span class="field-value">
+            <% if @account.status == 1 %>
+              Active
+            <% else %>
+              Inactive
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.type" %></span>
+          <span class="field-value">
+            <% if @account.type.nil? || @account.type == '' %>
+              N/A
+            <% else %>
+              <%= @account.type %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.client_discount" %></span>
+          <span class="field-value">
+            <% if @account.discount.nil? || @account.discount == '' %>
+              N/A
+            <% else %>
+              <%= @account.discount %>
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="field-set-container">
+  <h1 class="title">Address Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.business_address" %></span>
+          <span class="field-value">
+            <% if !@account.b_street.nil?  %>
+              <%= @account.b_street %>
+            <% end %>
+            <% if !@account.b_city.nil? %>
+              <%= @account.b_city %>
+            <% end %>
+            <% if !@account.b_state.nil? %>
+              <%= @account.b_state %>
+            <% end %>
+            <% if !@account.b_zip.nil? %>
+              <%= @account.b_zip %>
+            <% end %>
+            <% if (@account.b_street.nil? || @account.b_street == '') && (@account.b_city.nil? || @account.b_city == '') && (@account.b_state.nil? || @account.b_state == '') && (@account.b_zip.nil? || @account.b_zip == '')  %>
+              N/A
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.shipping_address" %></span>
+          <span class="field-value">
+            <% if !@account.s_street.nil? %>
+              <%= @account.s_street %>
+            <% end %>
+            <% if !@account.s_city.nil? %>
+              <%= @account.s_city %>
+            <% end %>
+            <% if !@account.s_state.nil? %>
+              <%= @account.s_state %>
+            <% end %>
+            <% if !@account.s_zip.nil? %>
+              <%= @account.s_zip %>
+            <% end %>
+            <% if (@account.s_street.nil? || @account.s_street == '') && (@account.s_city.nil? || @account.s_city == '') && (@account.s_state.nil? || @account.s_state == '') && (@account.s_zip.nil? || @account.s_zip == '')  %>
+              N/A
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="field-set-container">
+  <h1 class="title">Other Information</h1>
+  <div class="body">
+    <div class="row-fluid">
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.industry" %></span>
+          <span class="field-value">
+            <% if @account.industry.nil? || @account.industry == '' %>
+              N/A
+            <% else %>
+              <%= @account.industry %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.employees" %></span>
+          <span class="field-value">
+            <% if @account.employees.nil? || @account.employees == '' %>
+              N/A
+            <% else %>
+              <%= @account.employees %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.annual_revenue" %></span>
+          <span class="field-value">
+            <% if @account.annual_revenue.nil? || @account.annual_revenue == '' %>
+              N/A
+            <% else %>
+              <%= @account.annual_revenue %>
+            <% end %>
+          </span>
+        </p>
+      </div>
+      <div class="span5">
+        <p class="field-row">
+          <span class="field-label"><%= t "account.description" %></span>
+          <span class="field-value">
+            <% if @account.description.nil? || @account.description == '' %>
+              N/A
+            <% else %>
+              <%= @account.description %>
+            <% end %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.created_at" %></span>
+          <span class="field-value">
+            <%= @account.created_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+        <p class="field-row">
+          <span class="field-label"><%= t "account.updated_at" %></span>
+          <span class="field-value">
+            <%= @account.updated_at.to_formatted_s(:db) %>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-actions" style="text-align: center;">
+  <div class="btn-group">
+    <a class="btn btn-small" href="<%= edit_account_path(:id => @account.unique_id) %>">Edit</a>
+    <%= link_to "Delete", account_path(:id => @account.unique_id),:confirm => 'Are you sure?', :method => :delete, :class => "btn btn-small" %>
+    <a id="<%= @account.unique_id %>" class="btn btn-small lnk-contact" href="javascript://">Contacts</a>
+    <a class="btn btn-small" href="<%= accounts_path %>">Cancel</a>
+  </div>
+</div>
+<div class="clear"></div>
+
+
+<script>
+  $(".lnk-contact").bind('click', function(e){
+    var _id = $(this).attr("id");
+    $('#alertContent').html("");
+    $('#alertModalLabel').html('Contacts');
+    $('#alertModal').modal('show');
+    $('#alertContent').html("Loading ...");
+    $.ajax({
+      url: '../account/'+_id+'/get_contacts',
+      success: function(html){
+        $('#alertContent').html(html);
+      }
+    });
+    return false;
+  });
+</script>
+
+<div id="alertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true" data-backdrop="true" style="width: 80%;left: 9%; margin-left: auto;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="alertModalLabel" class="nts-modal-title"></h3>
+  </div>
+  <div class="modal-body">
+    <p id="alertContent"></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">OK</button>
+  </div>
+</div>
+
+

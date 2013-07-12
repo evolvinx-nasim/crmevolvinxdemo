@@ -1,0 +1,135 @@
+<script>
+  form = '', widget = '';
+  $.fn.doCreateLead = function(){
+    form = $(this);
+    widget = $('#createLead');
+    $(".alert, .progress, #new_lead", widget).hide();
+    $(".progress", widget).show();
+    $.post('../leads', form.serialize(), function(data){
+      $(".alert, .progress", widget).hide();
+      if(data.success){
+        $(".alert", widget)
+        .removeClass('alert-error')
+        .addClass('alert-success')
+        .html(data.message)
+        .show();
+        setTimeout("window.location.href = '/leads'",1000);
+      } else {
+        var $ul = $('<ul/>');
+        $ul.addClass('error');
+        if (data.exception.indexOf('{') == 0) {
+          e = jQuery.parseJSON(data.exception);
+          jQuery.each(e, function(key, value) {
+            $ul.append('<li>' + value.toString() + '</li>');
+          });
+        } else {
+          $ul.append('<li>' + data.exception + '</li>');
+        }
+        $(".progress", widget).hide();
+        $(".alert", widget)
+        .removeClass('alert-success')
+        .addClass('alert-error')
+        .html($ul)
+        .show();
+        $("#new_lead", widget).show();
+      }
+
+    }).fail(function() {
+      $(".progress", widget).hide();
+      $(".alert", widget)
+      .removeClass('alert-success')
+      .addClass('alert-error')
+      .html("Error while processing the request!")
+      .show();
+      $("#new_lead", widget).show();
+    });
+  }
+
+
+
+  $(document).ready(function(){
+    $("#new_lead").validate({
+      submitHandler: function(form) {
+        $(form).doCreateLead();
+        return false;
+      }
+    });
+  });
+
+</script>
+
+<div class="row-fluid page-title">
+  <h2>Create Lead</h2>
+</div>
+<div id="createLead">
+  <div id="ajaxHandler">
+    <div class="row-fluid">
+      <div id="crmAjaxProgress" class="progress progress-striped active" style="display: none;">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+      <div id="crmAjaxMessage" class="alert" style="display: none;">
+        Error!
+      </div>
+    </div>
+  </div>
+  <%= simple_form_for @lead, :remote=>true, :html => { :class => "form-horizontal", :onsubmit => "return false;"}  do |f| %>
+    <div class="field-set-container">
+      <h1 class="title">Personal Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :title, :collection =>[["Mr.","Mr."],["Mrs.","Mrs."]], :selected => "Mr." %>
+            <%= f.input :firstname, :label => (t "lead.firstname") %>
+            <%= f.input :lastname, :label =>(t "lead.lastname") %>
+            <%= f.input :email, :label =>(t "lead.email") %>
+          </div>
+          <div class="span5">
+            <%= f.input :status, :collection =>[["Contacted","Contacted"],["Open","Open"],["Qualified","Qualified"],["Unqualified","Unqualified"]], :selected => "Open" %>
+            <%= f.input :company, :label =>(t "lead.company") %>
+            <%= f.input :phone, :label =>(t "lead.phone") %>
+            <%= f.input :ratting, :collection =>[["Select",""],["Hot","Hot"],["Warm","Warm"],["Cold","Cold"]], :selected => "" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-set-container">
+      <h1 class="title">Address Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :street, :as => :text, :input_html => { :cols => 50, :rows => 3 } %>
+          </div>
+          <div class="span5">
+            <%= f.input :city, :label =>(t "lead.city") %>
+            <%= f.input :state, :label =>(t "lead.state") %>
+            <%= f.input :zip, :label =>(t "lead.zip") %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field-set-container">
+      <h1 class="title">Other Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :annual_revenue, :label =>(t "lead.annual_revenue") %>
+            <%= f.input :employee_no, :label =>(t "lead.no_of_employee") %>
+            <%= f.input :lead_source, :label =>(t "lead.lead_source") %>
+          </div>
+          <div class="span5">
+            <%= f.input :description, :as => :text, :input_html => { :cols => 50, :rows => 3 } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <div class="btn-group">
+        <%= f.submit nil, :class => "btn btn-primary" %>
+        <%= link_to t("global.cancel"), leads_path, :class => "btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>

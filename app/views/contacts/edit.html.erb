@@ -1,0 +1,64 @@
+<div class="row-fluid page-title">
+  <h2>Update Contact</h2>
+</div>
+<div id="editContact">
+  <div id="ajaxHandler">
+    <div class="row-fluid">
+      <div id="crmAjaxProgress" class="progress progress-striped active" style="display: none;">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+      <div id="crmAjaxMessage" class="alert" style="display: none;">
+        Error!
+      </div>
+    </div>
+  </div>
+  <%= simple_form_for(@contact, :url => contact_path(:id => @contact.unique_id), :method => :update, :html => {:class => "form-horizontal"})  do |f| %>
+    <div class="field-set-container">
+      <h1 class="title">Personal Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :title, :collection =>[["Mr.","Mr."],["Mrs.","Mrs."]], :selected => "Mr." %>
+            <%= f.input :firstname, :label => (t "contact.first_name") %>
+            <%= f.input :lastname, :label => (t "contact.last_name") %>
+            <%= f.input :email, :label =>(t "contact.email") %>
+          </div>
+          <div class="span5">
+            <%= f.input :phone, :label =>(t "contact.phone") %>
+            <%= f.association :account, collection: @accounts.map{ |account| [account.account_name, account.id]}, :include_blank => "Select Account", :selected => @contact.account_name %>
+            <%= f.input :position, :label =>(t "contact.position") %>
+            <%= f.input :status, :collection =>[["Active","1"],["Inactive","2"]], :selected => @contact.status %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-set-container">
+      <h1 class="title">Address Information</h1>
+      <div class="body">
+        <div class="row-fluid">
+          <div class="span5">
+            <%= f.input :m_street, :as => :text, :label => (t "contact.mailing_street"), :input_html => { :cols => 50, :rows => 3 } %>
+            <%= f.input :m_city, :label =>(t "contact.mailing_city") %>
+            <%= f.input :m_state, :label =>(t "contact.mailing_state") %>
+            <%= f.input :m_zip, :label =>(t "contact.mailing_zip") %>
+          </div>
+          <div class="span5">
+            <%= f.input :o_street, :as => :text, :label => (t "contact.other_street"), :input_html => { :cols => 50, :rows => 3 } %>
+            <%= f.input :o_city, :label =>(t "contact.other_city") %>
+            <%= f.input :o_state, :label =>(t "contact.other_state") %>
+            <%= f.input :o_zip, :label =>(t "contact.other_zip") %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <div class="btn-group">
+        <%= f.submit nil, :class => "btn btn-primary" %>
+      <a class="btn btn-small" href="<%= contacts_path(:id => @contact.unique_id) %>">Cancel</a>
+      </div>
+    </div>
+  <% end %>
+</div>
